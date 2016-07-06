@@ -1,0 +1,30 @@
+spring:
+  profiles:
+    active: dev
+zuul:
+  routes:
+    test1:
+      path: /api/**
+      url: http://localhost:8082
+    test2:
+      path: /b/**
+      url: http://localhost:8081
+---
+spring:
+  profiles: dev
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+---
+spring:
+  profiles: standalone
+eureka:
+  client:
+    enabled: false
+---
+spring:
+  profiles: cloud
+  cloud:
+    config:
+      uri: ${vcap.services.${PREFIX:}configserver.credentials.uri:http://localhost:8888}
