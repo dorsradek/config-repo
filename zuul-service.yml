@@ -1,6 +1,8 @@
 spring:
   profiles:
     active: dev
+server:
+  port: ${PORT:8765}
 zuul:
   routes:
     test1:
